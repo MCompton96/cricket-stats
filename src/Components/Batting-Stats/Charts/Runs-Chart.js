@@ -1,6 +1,6 @@
 import { useTheme } from '@emotion/react';
 import * as React from 'react';
-import { Checkbox, FormControl, Grid, InputLabel, ListItemText, MenuItem, OutlinedInput, Select } from '@mui/material';
+import { Checkbox, FormControl, InputLabel, ListItemText, MenuItem, OutlinedInput, Select } from '@mui/material';
 import { Bar, BarChart, Tooltip, ResponsiveContainer, XAxis, YAxis, Legend, CartesianGrid } from 'recharts';
 
 const ITEM_HEIGHT = 48;

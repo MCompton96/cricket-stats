@@ -51,6 +51,7 @@ function AverageChart({data}) {
                 <Line
                     dataKey="average"
                     stroke={theme.palette.primary.main}
+                    name="Average"
                 />
                 <Tooltip />
                 </LineChart>

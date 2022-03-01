@@ -10,7 +10,7 @@ import { Link } from 'react-router-dom';
 
 export const mainListItems = (
   <React.Fragment>
-    <ListItemButton>
+    <ListItemButton component={Link} to={'/'}>
       <ListItemIcon>
         <DashboardIcon />
       </ListItemIcon>
@@ -31,7 +31,10 @@ export const mainListItems = (
         </ListItemIcon>
         <ListItemText primary="Batting Stats" />
     </ListItemButton>
-    <ListItemButton>
+    <ListItemButton 
+      component={Link}
+      to={'/bowling'}
+    >
       <ListItemIcon>
         <SportsHandballIcon />
       </ListItemIcon>

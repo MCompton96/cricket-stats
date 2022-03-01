@@ -1,6 +1,5 @@
 import { Table, TableBody, TableCell, TableHead, TableRow } from '@mui/material';
 import * as React from 'react';
-import { battingData } from '../../Data/Batting-Data';
 import Title from '../Title/Title';
 import * as StatsHelpers from '../../Common/Helpers/StatsHelpers';
 

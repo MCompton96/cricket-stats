@@ -11,6 +11,7 @@ import BattingStats from './Components/Batting-Stats/Batting-Stats';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { Box } from '@mui/system';
 import { CssBaseline } from '@mui/material';
+import BowlingStats from './Components/Bowling-Stats/Bowling-Stats';
 
 const mdTheme = createTheme();
 
@@ -24,6 +25,7 @@ function App() {
             <Routes>
                 <Route path="/" element={<Dashboard />}/>
                 <Route path="batting" element={<BattingStats />}/>
+                <Route path="bowling" element={<BowlingStats />}/>
             </Routes>
         </Box>
       </ThemeProvider>
