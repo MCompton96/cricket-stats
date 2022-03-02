@@ -1,5 +1,9 @@
 import { Box, Container, Grid, Paper, Toolbar } from '@mui/material';
 import * as React from 'react';
+import { battingData } from '../../Data/Batting-Data';
+import { bowlingData } from '../../Data/Bowling-Data';
+import { gameData } from '../../Data/Game-Data';
+import GamesTable from './Games-Table';
 
 
 function Games() {
@@ -22,7 +26,11 @@ function Games() {
                     <Grid container spacing={3}>
                         <Grid item xs={12}>
                             <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column'}}>
-                                <h1>Game data</h1>
+                                <GamesTable 
+                                    gameData={gameData}
+                                    battingData={battingData}
+                                    bowlingData={bowlingData}
+                                />
                             </Paper>
                         </Grid>
                     </Grid>

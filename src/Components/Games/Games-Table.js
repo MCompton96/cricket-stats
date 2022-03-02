@@ -28,6 +28,19 @@ function GamesTable({gameData, bowlingData, battingData}) {
                     {gameData.map((game) => (
                         <TableRow key={game.id}>
                             <TableCell>{formatDate(game.date)}</TableCell>
+                            <TableCell>{game.opponent}</TableCell>
+                            <TableCell>
+                                <span>{game.result.win ? 'Won' : 'Lost'}</span>
+                                <span> by </span>
+                                <span>{game.result.by} {game.result.type}</span>
+                            </TableCell>
+                            <TableCell>{game.batting.runs}</TableCell>
+                            <TableCell>
+                                <span>{game.bowling.wickets}</span>
+                                <span>/</span>
+                                <span>{game.bowling.runs}</span>
+                            </TableCell>
+                            <TableCell>{game.location.ground} (<span>{game.location.home ? 'H' : 'A'}</span>)</TableCell>
                         </TableRow>
                     ))}
                 </TableBody>
