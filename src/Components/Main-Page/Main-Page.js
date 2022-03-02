@@ -1,14 +1,14 @@
 import * as React from 'react';
 import { styled } from '@mui/material/styles';
 import MuiAppBar from '@mui/material/AppBar';
-import Badge from '@mui/material/Badge';
 import MenuIcon from '@mui/icons-material/Menu';
-import NotificationsIcon from '@mui/icons-material/Notifications';
 import MuiDrawer from '@mui/material/Drawer';
+import Button from '@mui/material/Button';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import { Divider, IconButton, List, Toolbar, Typography } from '@mui/material';
 import { mainListItems } from '../../listItems';
 import { Link } from 'react-router-dom';
+import AddIcon from '@mui/icons-material/Add';
 
 const drawerWidth = 240;
 
@@ -95,11 +95,9 @@ function MainPage() {
             >
                 Cricket Dashboard
             </Typography>
-          <IconButton color="inherit">
-            <Badge badgeContent={4} color="secondary">
-              <NotificationsIcon />
-            </Badge>
-          </IconButton>
+            <Button variant="contained" endIcon={<AddIcon />} style={{background: 'white', color: 'rgb(25, 118, 210)'}}>
+              Add Game Data
+            </Button>
         </Toolbar>
       </AppBar>
       <Drawer variant="permanent" open={open}>

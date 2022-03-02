@@ -1,6 +1,10 @@
 import { Container, Grid, Paper, Toolbar } from '@mui/material';
 import { Box } from '@mui/system';
 import * as React from 'react';
+import { bowlingData } from '../../Data/Bowling-Data';
+import BowlingTable from './Bowling-Table';
+import AverageChart from './Charts/Average-Chart';
+import GameChart from './Charts/Game-Chart';
 
 function BowlingStats() {
     return (
@@ -22,9 +26,33 @@ function BowlingStats() {
                     <Grid container spacing={3}>
                         <Grid item xs={12}>
                             <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column'}}>
-                                <h2>Bowling Data</h2>
+                                <BowlingTable data={bowlingData}/>
                             </Paper>
                         </Grid>
+                        <Grid item xs={12} md={4} lg={6}>
+                        <Paper
+                            sx={{
+                                p: 2,
+                                display: 'flex',
+                                flexDirection: 'column',
+                                height: 355,
+                            }}
+                        >
+                            <GameChart data={bowlingData}/>
+                        </Paper>
+                    </Grid>
+                    <Grid item xs={8} md={4} lg={6}>
+                        <Paper
+                            sx={{
+                                p: 2,
+                                display: 'flex',
+                                flexDirection: 'column',
+                                height: 355,
+                            }}
+                        >
+                            <AverageChart data={bowlingData} />
+                        </Paper>
+                    </Grid>
                     </Grid>
                 </Container>
             </Box>

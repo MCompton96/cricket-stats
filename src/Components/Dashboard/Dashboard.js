@@ -81,7 +81,7 @@ function DashboardContent() {
                 >
                   <Deposits 
                     title="Total Bowling Wickets"
-                    total={78}
+                    total={24}
                   />
                 </Paper>
               </Grid>
