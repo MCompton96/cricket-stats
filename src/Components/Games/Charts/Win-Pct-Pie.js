@@ -1,9 +1,10 @@
 import * as React from 'react';
 import { Cell, Pie, PieChart, ResponsiveContainer } from 'recharts';
+import Title from '../../Title/Title';
 
 const data = [
-    {name: 'win', total: 5},
-    { name: 'lose', total: 4}
+    {name: 'Won', total: 5},
+    { name: 'Lost', total: 4}
 ];
 
 const colors = ['#0088FE', '#00C49F'];
@@ -15,19 +16,26 @@ const renderCustomizedLabel = ({ cx, cy, midAngle, innerRadius, outerRadius, per
     const y = cy + radius * Math.sin(-midAngle * RADIAN);
   
     return (
-      <text x={x} y={y} fill="white" textAnchor={x > cx ? 'start' : 'end'} dominantBaseline="central">
-        {`${(percent * 100).toFixed(0)}%`}
+      <text x={x} y={y} fill="white" textAnchor='middle' dominantBaseline="central">
+        {`${data[index].name} ${(percent * 100).toFixed(0)}%`}
       </text>
     );
   };
 
-function WinPctPie() {
+function WinPctPie({won, lost, title}) {
+
+    const graphData = [
+        {name: 'Won', total: won},
+        {name: 'Lost', total: lost}
+    ];
+
     return (
         <React.Fragment>
+            <Title>{title}</Title>
             <ResponsiveContainer>
                 <PieChart>
                     <Pie
-                        data={data}
+                        data={graphData}
                         cx="50%"
                         cy="50%"
                         dataKey="total"

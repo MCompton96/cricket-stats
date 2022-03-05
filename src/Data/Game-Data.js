@@ -11,6 +11,16 @@ export const gameData = [
         location: {
             home: true,
             ground: 'Whaley Range'
+        },
+        scores: {
+            home: {
+                runs: 246,
+                wickets: 8
+            },
+            away: {
+                runs: 202,
+                wickets: 9
+            }
         }
     },
     {
@@ -25,6 +35,16 @@ export const gameData = [
         location: {
             home: false,
             ground: 'Wilmslow'
+        },
+        scores: {
+            home: {
+                runs: 193,
+                wickets: 8
+            },
+            away: {
+                runs: 191,
+                wickets: 7
+            }
         }
     },
     {
@@ -39,6 +59,16 @@ export const gameData = [
         location: {
             home: true,
             ground: 'Whalley Range'
+        },
+        scores: {
+            home: {
+                runs: 202,
+                wickets: 6
+            },
+            away: {
+                runs: 200,
+                wickets: 10
+            }
         }
     },
     {
@@ -53,6 +83,16 @@ export const gameData = [
         location: {
             home: false,
             ground: 'Alderley Edge'
+        },
+        scores: {
+            home: {
+                runs: 192,
+                wickets: 7
+            },
+            away: {
+                runs: 161,
+                wickets: 10
+            }
         }
     },
     {
@@ -67,6 +107,16 @@ export const gameData = [
         location: {
             home: false,
             ground: 'Altrincham'
+        },
+        scores: {
+            home: {
+                runs: 190,
+                wickets: 10
+            },
+            away: {
+                runs: 269,
+                wickets: 7
+            }
         }
     },
     {
@@ -81,6 +131,16 @@ export const gameData = [
         location: {
             home: true,
             ground: 'Whalley Range'
+        },
+        scores: {
+            home: {
+                runs: 171,
+                wickets: 10
+            },
+            away: {
+                runs: 173,
+                wickets: 3
+            }
         }
     },
     {
@@ -95,6 +155,16 @@ export const gameData = [
         location: {
             home: false,
             ground: 'Longsight'
+        },
+        scores: {
+            home: {
+                runs: 151,
+                wickets: 10
+            },
+            away: {
+                runs: 202,
+                wickets: 7
+            }
         }
     }
 ];
