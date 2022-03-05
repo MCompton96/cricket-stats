@@ -3,6 +3,7 @@ import * as React from 'react';
 import { battingData } from '../../Data/Batting-Data';
 import { bowlingData } from '../../Data/Bowling-Data';
 import { gameData } from '../../Data/Game-Data';
+import WinPctPie from './Charts/Win-Pct-Pie';
 import GamesTable from './Games-Table';
 
 
@@ -24,6 +25,18 @@ function Games() {
                 <Toolbar />
                 <Container maxWidth="lg" sx={{ mt: 4, mb: 4}}>
                     <Grid container spacing={3}>
+                        <Grid item xs={12} md={8} lg={3}>
+                            <Paper
+                                sx={{
+                                    p: 2,
+                                    display: 'flex',
+                                    flexDirection: 'column',
+                                    height: 255
+                                }}
+                            >
+                                <WinPctPie />
+                            </Paper>
+                        </Grid>
                         <Grid item xs={12}>
                             <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column'}}>
                                 <GamesTable 
