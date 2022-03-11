@@ -1,5 +1,7 @@
 import { Box, Container, Grid, Paper, Toolbar } from '@mui/material';
 import * as React from 'react';
+import { fetchLatLng } from '../../Common/Services/postcode-service';
+import { fetchWeatherData } from '../../Common/Services/weather-service';
 import { battingData } from '../../Data/Batting-Data';
 import { bowlingData } from '../../Data/Bowling-Data';
 import { gameData } from '../../Data/Game-Data';
@@ -36,6 +38,10 @@ function Games() {
             }
         }
     });
+
+    fetchWeatherData('M15 4LZ', new Date(2022, 2, 4)).then((res) => {
+        console.log(res.data);
+    })
 
     return (
         <React.Fragment>
