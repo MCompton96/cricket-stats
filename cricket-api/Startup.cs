@@ -39,6 +39,7 @@ namespace cricket_api
             services
                 .AddGraphQLServer()
                 .AddQueryType<Query>()
+                .AddMutationType<Mutation>()
                 .AddType<GameType>()
                 .AddType<ResultType>()
                 .AddType<GameLocationType>()

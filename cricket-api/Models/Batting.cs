@@ -14,7 +14,7 @@ namespace cricket_api.Models
         public int Runs { get; set; }
         [Required]
         public bool Out { get; set; }
-        public int Boundaries { get; set; }
-        public int Sixes { get; set; }
+        public int? Boundaries { get; set; }
+        public int? Sixes { get; set; }
     }
 }

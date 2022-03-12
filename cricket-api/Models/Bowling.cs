@@ -16,6 +16,6 @@ namespace cricket_api.Models
         public int Wickets { get; set; }
         [Required]
         public int Runs { get; set; }
-        public int Maidens { get; set; }
+        public int? Maidens { get; set; }
     }
 }
