@@ -4,12 +4,19 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import DashboardIcon from '@mui/icons-material/Dashboard';
 import SportsIcon from '@mui/icons-material/Sports';
+import AddIcon from '@mui/icons-material/Add';
 import SportsHandballIcon from '@mui/icons-material/SportsHandball';
 import SportsCricketIcon from '@mui/icons-material/SportsCricket';
 import { Link } from 'react-router-dom';
 
 export const mainListItems = (
   <React.Fragment>
+    <ListItemButton component={Link} to={'/add'}>
+      <ListItemIcon>
+        <AddIcon />
+      </ListItemIcon>
+      <ListItemText primary="Add Game" />
+    </ListItemButton>
     <ListItemButton component={Link} to={'/'}>
       <ListItemIcon>
         <DashboardIcon />

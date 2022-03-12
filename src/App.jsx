@@ -13,6 +13,7 @@ import { Box } from '@mui/system';
 import { CssBaseline } from '@mui/material';
 import BowlingStats from './Components/Bowling-Stats/Bowling-Stats';
 import Games from './Components/Games/Games';
+import AddGame from './Components/Add-Game/Add-Game';
 
 const mdTheme = createTheme();
 
@@ -28,6 +29,7 @@ function App() {
                 <Route path="batting" element={<BattingStats />}/>
                 <Route path="bowling" element={<BowlingStats />}/>
                 <Route path="games" element={<Games />}/>
+                <Route path="add" element={<AddGame />}/>
             </Routes>
         </Box>
       </ThemeProvider>

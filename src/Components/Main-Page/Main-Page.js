@@ -95,7 +95,8 @@ function MainPage() {
             >
                 Cricket Dashboard
             </Typography>
-            <Button variant="contained" endIcon={<AddIcon />} style={{background: 'white', color: 'rgb(25, 118, 210)'}}>
+            <Button variant="contained" endIcon={<AddIcon />} style={{background: 'white', color: 'rgb(25, 118, 210)'}}
+            component={Link} to={'/add'}>
               Add Game Data
             </Button>
         </Toolbar>
