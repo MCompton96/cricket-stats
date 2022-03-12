@@ -26,24 +26,28 @@ namespace cricket_api.GraphQL.Games
 
             descriptor
                 .Field(x => x.Result)
+                .Name("result")
                 .ResolveWith<Resolvers>(x => x.GetResult(default!, default!))
                 .UseDbContext<AppDbContext>()
                 .Description("Result associated with game");
 
             descriptor
                 .Field(x => x.Batting)
+                .Name("batting")
                 .ResolveWith<Resolvers>(x => x.GetBatting(default!, default!))
                 .UseDbContext<AppDbContext>()
                 .Description("Batting stats associated with game");
 
             descriptor
                 .Field(x => x.Bowling)
+                .Name("bowling")
                 .ResolveWith<Resolvers>(x => x.GetBowling(default!, default!))
                 .UseDbContext<AppDbContext>()
                 .Description("Bowling stats associated with game");
 
             descriptor
                 .Field(x => x.GameLocation)
+                .Name("location")
                 .ResolveWith<Resolvers>(x => x.GetLocation(default!, default!))
                 .UseDbContext<AppDbContext>()
                 .Description("Location information associated with game");
@@ -51,22 +55,22 @@ namespace cricket_api.GraphQL.Games
 
         private class Resolvers
         {
-            public Result GetResult(Game game, [ScopedService] AppDbContext context)
+            public Result GetResult([Parent] Game game, [ScopedService] AppDbContext context)
             {
                 return context.Results.FirstOrDefault(x => x.GameId == game.Id);
             }
 
-            public GameLocation GetLocation(Game game, [ScopedService] AppDbContext context)
+            public GameLocation GetLocation([Parent] Game game, [ScopedService] AppDbContext context)
             {
                 return context.Locations.FirstOrDefault(x => x.GameId == game.Id);
             }
 
-            public Batting GetBatting(Game game, [ScopedService] AppDbContext context)
+            public Batting GetBatting([Parent] Game game, [ScopedService] AppDbContext context)
             {
                 return context.Battings.FirstOrDefault(x => x.GameId == game.Id);
             }
 
-            public Bowling GetBowling(Game game, [ScopedService] AppDbContext context)
+            public Bowling GetBowling([Parent] Game game, [ScopedService] AppDbContext context)
             {
                 return context.Bowlings.FirstOrDefault(x => x.GameId == game.Id);
             }

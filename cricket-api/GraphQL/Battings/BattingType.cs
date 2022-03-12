@@ -34,7 +34,7 @@ namespace cricket_api.GraphQL.Battings
         }
         private class Resolvers
         {
-            public Game GetGame(Batting batting, [ScopedService] AppDbContext context)
+            public Game GetGame([Parent] Batting batting, [ScopedService] AppDbContext context)
             {
                 return context.Games.FirstOrDefault(x => x.Id == batting.GameId);
             }

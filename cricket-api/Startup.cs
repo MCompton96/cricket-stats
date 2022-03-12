@@ -13,6 +13,10 @@ using cricket_api.Data;
 using cricket_api.GraphQL;
 using Microsoft.EntityFrameworkCore;
 using cricket_api.GraphQL.Games;
+using cricket_api.GraphQL.Results;
+using cricket_api.GraphQL.Battings;
+using cricket_api.GraphQL.Bowlings;
+using cricket_api.GraphQL.Location;
 
 namespace cricket_api
 {
@@ -36,7 +40,10 @@ namespace cricket_api
                 .AddGraphQLServer()
                 .AddQueryType<Query>()
                 .AddType<GameType>()
-                .AddProjections();
+                .AddType<ResultType>()
+                .AddType<GameLocationType>()
+                .AddType<BowlingType>()
+                .AddType<BattingType>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

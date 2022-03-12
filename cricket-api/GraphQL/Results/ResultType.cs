@@ -28,13 +28,14 @@ namespace cricket_api.GraphQL.Results
 
             descriptor
                 .Field(x => x.Game)
+                .Name("game")
                 .ResolveWith<Resolvers>(x => x.GetGame(default!, default!))
                 .UseDbContext<AppDbContext>()
                 .Description("Game associated with result");
         }
         private class Resolvers
         {
-            public Game GetGame(Result result, [ScopedService] AppDbContext context)
+            public Game GetGame([Parent] Result result, [ScopedService] AppDbContext context)
             {
                 return context.Games.FirstOrDefault(x => x.Id == result.GameId);
             }

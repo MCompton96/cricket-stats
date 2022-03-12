@@ -30,7 +30,7 @@ namespace cricket_api.GraphQL.Location
         }
         private class Resolvers
         {
-            public Game GetGame(GameLocation location, [ScopedService] AppDbContext context)
+            public Game GetGame([Parent] GameLocation location, [ScopedService] AppDbContext context)
             {
                 return context.Games.FirstOrDefault(x => x.Id == location.GameId);
             }
