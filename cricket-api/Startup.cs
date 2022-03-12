@@ -43,7 +43,9 @@ namespace cricket_api
                 .AddType<ResultType>()
                 .AddType<GameLocationType>()
                 .AddType<BowlingType>()
-                .AddType<BattingType>();
+                .AddType<BattingType>()
+                .AddSorting()
+                .AddFiltering();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

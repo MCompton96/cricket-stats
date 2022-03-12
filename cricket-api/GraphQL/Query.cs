@@ -11,6 +11,8 @@ namespace cricket_api.GraphQL
     {
         [GraphQLDescription("Represents the queries for the cricket games")]
         [UseDbContext(typeof(AppDbContext))]
+        [UseFiltering]
+        [UseSorting]
         public IQueryable<Game> GetGame([ScopedService] AppDbContext context)
         {
             return context.Games;
@@ -18,6 +20,8 @@ namespace cricket_api.GraphQL
 
         [GraphQLDescription("Represents the queries for the batting stats")]
         [UseDbContext(typeof(AppDbContext))]
+        [UseFiltering]
+        [UseSorting]
         public IQueryable<Batting> GetBatting([ScopedService] AppDbContext context)
         {
             return context.Battings;
@@ -25,6 +29,8 @@ namespace cricket_api.GraphQL
 
         [GraphQLDescription("Represents the queries for the bowling stats")]
         [UseDbContext(typeof(AppDbContext))]
+        [UseFiltering]
+        [UseSorting]
         public IQueryable<Bowling> GetBowling([ScopedService] AppDbContext context)
         {
             return context.Bowlings;
@@ -32,6 +38,8 @@ namespace cricket_api.GraphQL
 
         [GraphQLDescription("Represents the queries for game results")]
         [UseDbContext(typeof(AppDbContext))]
+        [UseFiltering]
+        [UseSorting]
         public IQueryable<Result> GetResult([ScopedService] AppDbContext context)
         {
             return context.Results;
@@ -39,6 +47,8 @@ namespace cricket_api.GraphQL
 
         [GraphQLDescription("Represents the queries for the game locations")]
         [UseDbContext(typeof(AppDbContext))]
+        [UseFiltering]
+        [UseSorting]
         public IQueryable<GameLocation> GetLocation([ScopedService] AppDbContext context)
         {
             return context.Locations;
