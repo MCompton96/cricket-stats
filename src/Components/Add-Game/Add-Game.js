@@ -1,10 +1,27 @@
-import { Checkbox, Container, FormControl, FormGroup, Grid, Input, InputLabel, Paper, Stack, TextField, Toolbar } from '@mui/material';
+import { 
+    Container, 
+    FormControl, 
+    FormControlLabel, 
+    Grid, 
+    IconButton, 
+    Paper, 
+    Radio, 
+    RadioGroup, 
+    Stack, 
+    TextField, 
+    Toolbar 
+} from '@mui/material';
 import { Box } from '@mui/system';
 import * as React from 'react';
 import Title from '../Title/Title';
 import moment from 'moment';
+import { NavigateBefore, NavigateNext } from '@mui/icons-material';
+import BasicInfoForm from './Basic-Info-Form';
+import ResultForm from './Result-Form';
 
 function AddGame() {
+    const [page, setPage] = React.useState(1);
+
     return (
         
         <React.Fragment>
@@ -23,27 +40,28 @@ function AddGame() {
                 <Toolbar />
                 <Container maxWidth="lg" sx={{ mt: 4, mb: 4}}>
                     <Grid container spacing={3}>
-                        <Grid item xs={12}>
-                            <Paper sx={{ p:2, display: 'flex', flexDirection: 'column'}}>
-                                <Title>Basic Game Information</Title>
-                                <Stack component="form" spacing={5} sx={{p: 3}}>
-                                    <TextField 
-                                        id="opponent"
-                                        label="Opponent"
-                                        type="text"
-                                        variant="outlined"
-                                    />
-                                    <TextField 
-                                        id="date"
-                                        label="Game Date"
-                                        type="date"
-                                        defaultValue={moment().format("YYYY-MM-DD")}
-                                        InputLabelProps={{
-                                            shrink: true
-                                        }}
-                                    />
-                                </Stack>
-                            </Paper>
+                        {page === 1 && (<BasicInfoForm />)}
+                        {page === 2 && (<ResultForm />)}
+                        <Grid item xs={12} sx={{display: 'flex', justifyContent: 'center'}}>
+                            <IconButton 
+                                disabled={page === 1}
+                                onClick={() => {
+                                    const prevPage = page - 1;
+                                    console.log(prevPage);
+                                    setPage(prevPage);
+                                }}
+                            >
+                                <NavigateBefore />
+                            </IconButton>
+                            <IconButton 
+                                onClick={() => {
+                                    const nextPage = page + 1;
+                                    console.log(nextPage);
+                                    setPage(nextPage);
+                                }}
+                            >
+                                <NavigateNext />
+                            </IconButton>
                         </Grid>
                     </Grid>
                 </Container>
