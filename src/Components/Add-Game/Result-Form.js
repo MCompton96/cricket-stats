@@ -21,7 +21,7 @@ function ResultForm({resultData, setResultData}) {
                                 name='radio-buttons-group'
                                 value={resultData.won}
                                 onChange={(e) => {
-                                    const won = e.target.value;
+                                    const won = e.target.value === 'true' ? true : false;
                                     setResultData({...resultData, won});
                                 }}
                             >

@@ -68,7 +68,7 @@ function BasicInfoForm({basicData, setBasicData}) {
                         name='radio-buttons-group'
                         value={basicData.home}
                         onChange={(e) => {
-                            const home = e.target.value;
+                            const home = e.target.value === 'true' ? true : false;
                             setBasicData({...basicData, home});
                         }}
                     >

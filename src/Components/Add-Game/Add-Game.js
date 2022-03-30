@@ -12,12 +12,38 @@ import BasicInfoForm from './Basic-Info-Form';
 import ResultForm from './Result-Form';
 import { useMutation } from '@apollo/client';
 import { Mutations } from '../../GraphQL';
+import { useNavigate } from 'react-router-dom';
 
 function AddGame() {
 
-    const [addGame] = useMutation(Mutations.ADD_GAME, { 
-        onCompleted: (data) => {console.log(data)}});
+    const navigate = useNavigate();
 
+    const [addBatting] = useMutation(Mutations.ADD_BATIING, {
+        onCompleted: () => {
+            navigate('/');
+        }
+    });
+    const [addBowling] = useMutation(Mutations.ADD_BOWLING);
+
+    const [addGame] = useMutation(Mutations.ADD_GAME, { 
+        onCompleted: ({addGame}) => {
+            addBowling({variables: {
+                gameId: addGame.game.id,
+                overs: parseInt(resultData.overs),
+                wickets: parseInt(resultData.wickets),
+                runs: parseInt(resultData.runsConceded),
+                maidens: parseInt(resultData.wickets)
+            }});
+    
+            addBatting({variables: {
+                gameId: addGame.game.id,
+                runs: parseInt(resultData.runs),
+                out: resultData.out,
+                boundaries: parseInt(resultData.boundaries),
+                sixes: parseInt(resultData.sixes)
+            }});
+        }});
+    
     const [page, setPage] = React.useState(1);
 
     const [basicData, setBasicData] = React.useState({
@@ -34,6 +60,7 @@ function AddGame() {
         runs: 0,
         boundaries: 0,
         sixes: 0,
+        out: true,
         overs: 0,
         runsConceded: 0,
         wickets: 0,
@@ -41,7 +68,7 @@ function AddGame() {
     });
 
     const handleClick = async () => {
-        addGame({ variables: {
+        await addGame({ variables: {
             date: basicData.date,
             opponent: basicData.opponent,
             home: basicData.home,
@@ -51,6 +78,7 @@ function AddGame() {
             method: resultData.method
         }});
     }
+
     return (
         
         <React.Fragment>

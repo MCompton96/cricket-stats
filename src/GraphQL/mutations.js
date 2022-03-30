@@ -10,8 +10,9 @@ export const LOGIN = gql`
 `;
 
 export const ADD_BATIING = gql`
-    mutation AddBatting($runs: Int!, $boundaries: Int!, $sixes: Int!, $out: Boolean!) {
+    mutation AddBatting($gameId: UUID!, $runs: Int!, $boundaries: Int!, $sixes: Int!, $out: Boolean!) {
         addBatting(input: {
+            gameId: $gameId,
             runs: $runs,
             boundaries: $boundaries,
             sixes: $sixes,
@@ -25,8 +26,9 @@ export const ADD_BATIING = gql`
 `;
 
 export const ADD_BOWLING = gql`
-    mutation AddBowling($overs: Int!, $wickets: Int!, $runs: Int!, $maidens: Int) {
+    mutation AddBowling($gameId: UUID!, $overs: Int!, $wickets: Int!, $runs: Int!, $maidens: Int!) {
         addBowling(input: {
+            gameId: $gameId,
             overs: $overs,
             wickets: $wickets,
             runs: $runs,
