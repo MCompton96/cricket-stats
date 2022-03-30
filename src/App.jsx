@@ -14,23 +14,34 @@ import { CssBaseline } from '@mui/material';
 import BowlingStats from './Components/Bowling-Stats/Bowling-Stats';
 import Games from './Components/Games/Games';
 import AddGame from './Components/Add-Game/Add-Game';
+import Login from './Components/Login/Login';
+import { isNullOrWhitespace } from './Common/Helpers/StringHelpers';
 
 const mdTheme = createTheme();
 
 function App() {
+
+  const [token, setToken] = React.useState('');
+  
   return (
     <BrowserRouter>
       <ThemeProvider theme={mdTheme}>
         <Box sx={{ display: 'flex' }}>
           <CssBaseline />
-          <MainPage />
-            <Routes>
-                <Route path="/" element={<Dashboard />}/>
-                <Route path="batting" element={<BattingStats />}/>
-                <Route path="bowling" element={<BowlingStats />}/>
-                <Route path="games" element={<Games />}/>
-                <Route path="add" element={<AddGame />}/>
-            </Routes>
+          {isNullOrWhitespace(token) ? (
+            <Login setToken={setToken}/>
+          ) : (
+            <React.Fragment>
+              <MainPage setToken={setToken}/>
+                <Routes>
+                    <Route path="/" element={<Dashboard />}/>
+                    <Route path="batting" element={<BattingStats />}/>
+                    <Route path="bowling" element={<BowlingStats />}/>
+                    <Route path="games" element={<Games />}/>
+                    <Route path="add" element={<AddGame />}/>
+                </Routes>
+            </React.Fragment>
+          )}
         </Box>
       </ThemeProvider>
     </BrowserRouter>

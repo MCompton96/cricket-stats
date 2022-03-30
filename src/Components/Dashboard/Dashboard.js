@@ -9,6 +9,9 @@ import Link from '@mui/material/Link';
 import Chart from '../Chart/Chart';
 import Deposits from '../Deposits/Deposits';
 import Orders from '../Orders/Orders';
+import { Queries } from '../../GraphQL';
+import * as StatsHelpers from '../../Common/Helpers/StatsHelpers';
+import { useQuery } from '@apollo/client';
 
 function Copyright(props) {
   return (
@@ -24,7 +27,27 @@ function Copyright(props) {
 }
 
 function DashboardContent() {
+
+  const [games, setGames] = React.useState([]);
+  const [batting, setBatting] = React.useState([]);
+  const [bowling, setBowling] = React.useState([]);
+
+  const { data } = useQuery(Queries.GET_GAME_DATA);
   
+
+  React.useEffect(() => {
+    if (data) {
+      setGames(data?.game);
+    }
+  }, [data]);
+
+  React.useEffect(() => {
+    const battingStats = games.filter(x => x.batting).map(x => x.batting);
+    setBatting(battingStats);
+    const bowlingStats = games.filter(x => x.bowling).map(x => x.bowling);
+    setBowling(bowlingStats);
+  }, [games])
+
   return (
     <React.Fragment>
         <Box
@@ -52,7 +75,7 @@ function DashboardContent() {
                     height: 255,
                   }}
                 >
-                  <Chart />
+                  <Chart battingData={batting}/>
                 </Paper>
               </Grid>
               {/* Recent Deposits */}
@@ -68,7 +91,7 @@ function DashboardContent() {
                 >
                   <Deposits 
                     title="Total Batting Runs"
-                    total={345}
+                    total={StatsHelpers.calculateRuns(batting)}
                   />
                 </Paper>
                 <Paper
@@ -81,14 +104,14 @@ function DashboardContent() {
                 >
                   <Deposits 
                     title="Total Bowling Wickets"
-                    total={24}
+                    total={StatsHelpers.totalWickets(bowling)}
                   />
                 </Paper>
               </Grid>
               {/* Recent Orders */}
               <Grid item xs={12}>
                 <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column' }}>
-                  <Orders />
+                  <Orders rows={games.slice(0, 2)}/>
                 </Paper>
               </Grid>
             </Grid>

@@ -10,8 +10,14 @@ import * as React from 'react';
 import { NavigateBefore, NavigateNext } from '@mui/icons-material';
 import BasicInfoForm from './Basic-Info-Form';
 import ResultForm from './Result-Form';
+import { useMutation } from '@apollo/client';
+import { Mutations } from '../../GraphQL';
 
 function AddGame() {
+
+    const [addGame] = useMutation(Mutations.ADD_GAME, { 
+        onCompleted: (data) => {console.log(data)}});
+
     const [page, setPage] = React.useState(1);
 
     const [basicData, setBasicData] = React.useState({
@@ -32,7 +38,19 @@ function AddGame() {
         runsConceded: 0,
         wickets: 0,
         maidens: 0
-    })
+    });
+
+    const handleClick = async () => {
+        addGame({ variables: {
+            date: basicData.date,
+            opponent: basicData.opponent,
+            home: basicData.home,
+            ground: basicData.ground,
+            won: resultData.won,
+            by: parseInt(resultData.by),
+            method: resultData.method
+        }});
+    }
     return (
         
         <React.Fragment>
@@ -66,7 +84,8 @@ function AddGame() {
                             </IconButton>
                             {page === 2 && (
                                 <Grid item xs={3} sx={{display: 'flex', justifyContent: 'center'}}>
-                                    <Button variant="contained" style={{background: 'rgb(25, 118, 210)', color: 'white'}}>
+                                    <Button variant="contained" style={{background: 'rgb(25, 118, 210)', color: 'white'}}
+                                    onClick={handleClick}>
                                     Submit
                                     </Button>
                                 </Grid>
@@ -74,7 +93,6 @@ function AddGame() {
                             <IconButton 
                                 onClick={() => {
                                     const nextPage = page + 1;
-                                    console.log(nextPage);
                                     setPage(nextPage);
                                 }}
                             >

@@ -5,7 +5,7 @@ import * as StatsHelpers from '../../../Common/Helpers/StatsHelpers';
 
 function AverageChart({data}) {
 
-    const graphData = data.map((match, i) => {
+    const graphData = data.map((_, i) => {
         return {
             match: `Match ${i + 1}`,
             average: StatsHelpers.calculateAverage(data.slice(0, i + 1))

@@ -1,16 +1,27 @@
+import { useQuery } from '@apollo/client';
 import { Container, Grid, Paper, Toolbar } from '@mui/material';
 import { Box } from '@mui/system';
 import * as React from 'react';
-import { battingData } from '../../Data/Batting-Data';
 import BattingTable from './Batting-Table';
 import AverageChart from './Charts/Average-Chart';
 import RunsChart from './Charts/Runs-Chart';
+import { Queries } from '../../GraphQL';
 
 function BattingStats() {
+
+    const [battingData, setBattingData] = React.useState([]);
+
+    const { data } = useQuery(Queries.GET_BATTING_DATA);
+
+    React.useEffect(() => {
+        if (data) {
+            setBattingData(data.batting);
+        }
+    }, [data])
     return (
         <React.Fragment>
             <Box
-                component="batting"
+                component="Batting"
                 sx={{
                     backgroundColor: (theme) =>
                         theme.palette.mode === 'light'

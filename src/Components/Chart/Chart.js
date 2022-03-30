@@ -2,33 +2,32 @@ import * as React from 'react';
 import { useTheme } from '@mui/material/styles';
 import { LineChart, Line, XAxis, YAxis, Label, ResponsiveContainer, Tooltip, CartesianGrid } from 'recharts';
 import Title from '../Title/Title';
-
-// Generate Sales Data
-function createData(games, runs) {
-  return { games, runs };
-}
-
-const data = [
-  createData('Match 1', 0),
-  createData('Match 2', 30),
-  createData('Match 3', 55),
-  createData('Match 4', 81),
-  createData('Match 5', 178),
-  createData('Match 6', 201),
-  createData('Match 7', 295),
-  createData('Match 8', 343),
-  createData('Match 9', 345),
-];
+import * as StatsHelpers from '../../Common/Helpers/StatsHelpers';
+import { Queries } from '../../GraphQL';
+import { useQuery } from '@apollo/client';
 
 export default function Chart() {
   const theme = useTheme();
 
+  const { data } = useQuery(Queries.GET_BATTING_RUNS);
+  
+  let graphData;
+  if (data) {
+    graphData = data.batting.map((_, i) => {
+      return {
+          match: `Match ${i + 1}`,
+          runs: StatsHelpers.calculateRuns(data.batting.slice(0, i + 1))
+      }
+  });
+  }
+  
   return (
     <React.Fragment>
       <Title>Total Runs</Title>
+      {data && (
       <ResponsiveContainer>
         <LineChart
-          data={data}
+          data={graphData}
           margin={{
             top: 16,
             right: 16,
@@ -38,7 +37,7 @@ export default function Chart() {
         >
           <CartesianGrid strokeDasharray="3 3" />
           <XAxis
-            dataKey="games"
+            dataKey="match"
             stroke={theme.palette.text.secondary}
             style={theme.typography.body2}
           />
@@ -66,6 +65,8 @@ export default function Chart() {
           <Tooltip />
         </LineChart>
       </ResponsiveContainer>
+
+      )}
     </React.Fragment>
   );
 }

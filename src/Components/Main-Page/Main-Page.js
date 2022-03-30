@@ -9,6 +9,7 @@ import { Divider, IconButton, List, Toolbar, Typography } from '@mui/material';
 import { mainListItems } from '../../listItems';
 import { Link } from 'react-router-dom';
 import AddIcon from '@mui/icons-material/Add';
+import { Logout } from '@mui/icons-material';
 
 const drawerWidth = 240;
 
@@ -56,11 +57,18 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
   }),
 );
 
-function MainPage() {
+function MainPage({setToken}) {
     const [open, setOpen] = React.useState(false);
   const toggleDrawer = () => {
     setOpen(!open);
   };
+
+  const handleClick = () => {
+    if (window.confirm("Are you sure you want to log out?")) {
+      localStorage.setItem("token", "");
+      setToken('');
+    }
+  }
 
   return (
     <React.Fragment>
@@ -98,6 +106,10 @@ function MainPage() {
             <Button variant="contained" endIcon={<AddIcon />} style={{background: 'white', color: 'rgb(25, 118, 210)'}}
             component={Link} to={'/add'}>
               Add Game Data
+            </Button>
+            <Button variant="contained" endIcon={<Logout />} sx={{background: 'red', color: 'white', ml: 3}}
+            onClick={handleClick}>
+              Logout
             </Button>
         </Toolbar>
       </AppBar>

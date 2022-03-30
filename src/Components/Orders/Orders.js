@@ -6,63 +6,24 @@ import TableCell from '@mui/material/TableCell';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Title from '../Title/Title';
+import moment from 'moment';
 
-// Generate Order Data
-function createData(id, date, opponent, result, runs, bowlingFigures, location) {
-  return { id, date, opponent, result, runs, bowlingFigures, location };
-}
 
-const rows = [
-  createData(
-    0,
-    '16 Mar, 2019',
-    'Didsbury 2nd XI',
-    'Won by 44 runs',
-    22,
-    '11/1',
-    'Whaley Range (H)'
-  ),
-  createData(
-    1,
-    '16 Mar, 2019',
-    'Wilmslow 1st XI',
-    'Lost by 2 Wickets',
-    5,
-    '15/0',
-    'Wilmslow (A)',
-  ),
-  // createData(
-  //   2, 
-  //   '16 Mar, 2019', 
-  //   'Prestwich ', 
-  //   'Boston, MA', 
-  //   'MC ⠀•••• 1253', 
-  //   100.81
-  // ),
-  // createData(
-  //   3,
-  //   '16 Mar, 2019',
-  //   'Michael Jackson',
-  //   'Gary, IN',
-  //   'AMEX ⠀•••• 2000',
-  //   654.39,
-  // ),
-  // createData(
-  //   4,
-  //   '15 Mar, 2019',
-  //   'Bruce Springsteen',
-  //   'Long Branch, NJ',
-  //   'VISA ⠀•••• 5919',
-  //   212.79,
-  // ),
-];
+export default function Orders({rows}) {
 
-function preventDefault(event) {
-  event.preventDefault();
-}
+  const formatResult = (result) => {
+    return `${result.won ? 'Won' : 'Lost'} by ${result.by} ${result.method}`;
+  }
 
-export default function Orders() {
-  return (
+  const formatBowlingFigures = (bowling) => {
+    return `${bowling.runs}/${bowling.wickets}`;
+  }
+
+  const formatLocation = (location) => {
+    return `${location.ground} (${location.home ? 'H' : 'A'})`;
+  }
+
+  return rows && (
     <React.Fragment>
       <Title>Recent Games</Title>
       <Table size="small">
@@ -79,17 +40,17 @@ export default function Orders() {
         <TableBody>
           {rows.map((row) => (
             <TableRow key={row.id}>
-              <TableCell>{row.date}</TableCell>
-              <TableCell>{row.result}</TableCell>
+              <TableCell>{moment(row.date).format('DD MMM YYYY')}</TableCell>
+              <TableCell>{formatResult(row.result)}</TableCell>
               <TableCell>{row.opponent}</TableCell>
-              <TableCell>{row.runs}</TableCell>
-              <TableCell>{row.bowlingFigures}</TableCell>
-              <TableCell>{row.location}</TableCell>
+              <TableCell>{row.batting ? row.batting.runs : 'N/A'}</TableCell>
+              <TableCell>{row.bowling ? formatBowlingFigures(row.bowling) : 'N/A'}</TableCell>
+              <TableCell>{formatLocation(row.location)}</TableCell>
             </TableRow>
           ))}
         </TableBody>
       </Table>
-      <Link color="primary" href="#" onClick={preventDefault} sx={{ mt: 3 }}>
+      <Link color="primary" href="#" sx={{ mt: 3 }} onClick={(e) => { e.preventDefault()}}>
         See more games
       </Link>
     </React.Fragment>

@@ -3,12 +3,15 @@ import * as React from 'react';
 import { formatDate } from '../../Common/Helpers/DateHelpers';
 import Title from '../Title/Title';
 
-function GamesTable({gameData, bowlingData, battingData}) {
+function GamesTable({gameData}) {
 
-    gameData.forEach(match => {
-        match.batting = battingData.find(x => x.gameId === match.id);
-        match.bowling = bowlingData.find(x => x.gameId === match.id);
-    });
+    const formatBowling = (bowling) => {
+        return `${bowling.wickets}/${bowling.runs}`;
+    }
+
+    const formatResult = (result) => {
+        return `${result.won ? 'Won' : 'Lost'} by ${result.by} ${result.method}`;
+    }
 
     return (
         <React.Fragment>
@@ -29,17 +32,9 @@ function GamesTable({gameData, bowlingData, battingData}) {
                         <TableRow key={game.id}>
                             <TableCell>{formatDate(game.date)}</TableCell>
                             <TableCell>{game.opponent}</TableCell>
-                            <TableCell>
-                                <span>{game.result.win ? 'Won' : 'Lost'}</span>
-                                <span> by </span>
-                                <span>{game.result.by} {game.result.type}</span>
-                            </TableCell>
-                            <TableCell>{game.batting.runs}</TableCell>
-                            <TableCell>
-                                <span>{game.bowling.wickets}</span>
-                                <span>/</span>
-                                <span>{game.bowling.runs}</span>
-                            </TableCell>
+                            <TableCell>{formatResult(game.result)}</TableCell>
+                            <TableCell>{game.batting ? game.batting.runs : 'N/A'}</TableCell>
+                            <TableCell>{game.bowling ? formatBowling(game.bowling) : 'N/A'}</TableCell>
                             <TableCell>{game.location.ground} (<span>{game.location.home ? 'H' : 'A'}</span>)</TableCell>
                         </TableRow>
                     ))}

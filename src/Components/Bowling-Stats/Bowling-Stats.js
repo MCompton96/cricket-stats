@@ -1,16 +1,29 @@
+import { useQuery } from '@apollo/client';
 import { Container, Grid, Paper, Toolbar } from '@mui/material';
 import { Box } from '@mui/system';
 import * as React from 'react';
-import { bowlingData } from '../../Data/Bowling-Data';
 import BowlingTable from './Bowling-Table';
 import AverageChart from './Charts/Average-Chart';
 import GameChart from './Charts/Game-Chart';
+import { Queries } from '../../GraphQL';
 
 function BowlingStats() {
+
+    const [bowlingData, setBowlingData] = React.useState([]);
+
+    const { data } = useQuery(Queries.GET_BOWLING_DATA);
+
+    React.useEffect(() => {
+        if (data) {
+            setBowlingData(data.bowling);
+        }
+    }, [data])
+
+    
     return (
         <React.Fragment>
             <Box
-                component="bowling"
+                component="Bowling"
                 sx={{
                     backgroundColor: (theme) =>
                         theme.palette.mode === 'light'

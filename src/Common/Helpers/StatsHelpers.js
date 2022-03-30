@@ -46,7 +46,11 @@ export const totalNotOuts = (data) => {
 }
 
 export const calculateAverage = (data) => {
-    return (calculateRuns(data) / (data.length - totalNotOuts(data)))
+    let divideBy = data.length - totalNotOuts(data);
+    if (divideBy === 0) {
+        divideBy = 1;
+    }
+    return (calculateRuns(data) / divideBy)
     .toFixed(2);
 }
 
@@ -94,6 +98,8 @@ export const bestFigures = (data) => {
     if (filteredList.length === 1) {
         const match = filteredList[0];
         return `${match.wickets}/${match.runs}`;
+    } else if (filteredList.length === 0) {
+        return 'N/A';
     } else {
         filteredList.sort((a, b) => { return a.runs - b.runs});
         const match = filteredList[0];

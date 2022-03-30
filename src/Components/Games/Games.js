@@ -1,13 +1,10 @@
+import { useQuery } from '@apollo/client';
 import { Box, Container, Grid, Paper, Toolbar } from '@mui/material';
 import * as React from 'react';
-import { fetchLatLng } from '../../Common/Services/postcode-service';
-import { fetchWeatherData } from '../../Common/Services/weather-service';
-import { battingData } from '../../Data/Batting-Data';
-import { bowlingData } from '../../Data/Bowling-Data';
-import { gameData } from '../../Data/Game-Data';
 import GameBarData from './Charts/Game-Bar-Data';
 import WinPctPie from './Charts/Win-Pct-Pie';
 import GamesTable from './Games-Table';
+import { Queries } from '../../GraphQL';
 
 
 function Games() {
@@ -21,8 +18,18 @@ function Games() {
         awayLoss: 0
     };
 
+    const [gameData, setGameData] = React.useState([]);
+
+    const { data } = useQuery(Queries.GET_GAME_DATA);
+
+    React.useEffect(() => {
+        if (data) {
+            setGameData(data.game);
+        }
+    }, [data])
+
     gameData.forEach((game) => {
-        if (game.result.win) {
+        if (game.result.won) {
             results.totalWins++;
             if (game.location.home) {
                 results.homeWin++;
@@ -38,10 +45,6 @@ function Games() {
             }
         }
     });
-
-    fetchWeatherData('M15 4LZ', new Date(2022, 2, 4)).then((res) => {
-        console.log(res.data);
-    })
 
     return (
         <React.Fragment>
@@ -112,8 +115,6 @@ function Games() {
                             <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column'}}>
                                 <GamesTable 
                                     gameData={gameData}
-                                    battingData={battingData}
-                                    bowlingData={bowlingData}
                                 />
                             </Paper>
                         </Grid>
