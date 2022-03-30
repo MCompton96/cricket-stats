@@ -21,7 +21,7 @@ const mdTheme = createTheme();
 
 function App() {
 
-  const [token, setToken] = React.useState('');
+  const [token, setToken] = React.useState(localStorage.getItem("token"));
   
   return (
     <BrowserRouter>
