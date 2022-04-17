@@ -13,6 +13,7 @@ import ResultForm from './Result-Form';
 import { useMutation } from '@apollo/client';
 import { Mutations } from '../../GraphQL';
 import { useNavigate } from 'react-router-dom';
+import BattingDetailsForm from './Batting-Details-Form';
 
 function AddGame() {
 
@@ -60,11 +61,15 @@ function AddGame() {
         runs: 0,
         boundaries: 0,
         sixes: 0,
-        out: true,
+        out: true
+    });
+
+    const [bowlingData, setBowlingData] = React.useState({
         overs: 0,
         runsConceded: 0,
         wickets: 0,
-        maidens: 0
+        maidens: 0,
+        wicketMarkers: []
     });
 
     const handleClick = async () => {
@@ -95,10 +100,11 @@ function AddGame() {
                 }}
             >
                 <Toolbar />
-                <Container maxWidth="lg" sx={{ mt: 4, mb: 4}}>
+                <Container sx={{ mt: 4, mb: 4}}>
                     <Grid container spacing={3}>
                         {page === 1 && (<BasicInfoForm basicData={basicData} setBasicData={setBasicData}/>)}
                         {page === 2 && (<ResultForm resultData={resultData} setResultData={setResultData}/>)}
+                        {page === 3 && (<BattingDetailsForm bowlingData={bowlingData} setBowlingData={setBowlingData}/>)}
                         <Grid item xs={12} sx={{display: 'flex', justifyContent: 'space-between'}}>
                             <IconButton 
                                 disabled={page === 1}
@@ -110,7 +116,7 @@ function AddGame() {
                                 >
                                 <NavigateBefore />
                             </IconButton>
-                            {page === 2 && (
+                            {page === 3 && (
                                 <Grid item xs={3} sx={{display: 'flex', justifyContent: 'center'}}>
                                     <Button variant="contained" style={{background: 'rgb(25, 118, 210)', color: 'white'}}
                                     onClick={handleClick}>
@@ -123,6 +129,7 @@ function AddGame() {
                                     const nextPage = page + 1;
                                     setPage(nextPage);
                                 }}
+                                disabled={page === 3}
                             >
                                 <NavigateNext />
                             </IconButton>

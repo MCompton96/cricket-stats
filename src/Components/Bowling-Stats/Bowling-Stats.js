@@ -6,6 +6,8 @@ import BowlingTable from './Bowling-Table';
 import AverageChart from './Charts/Average-Chart';
 import GameChart from './Charts/Game-Chart';
 import { Queries } from '../../GraphQL';
+import ImageMarker from 'react-image-marker';
+import styles from './bowling.module.css';
 
 function BowlingStats() {
 
@@ -36,7 +38,7 @@ function BowlingStats() {
             >
                 <Toolbar />
                 <Container maxWidth='lg' sx={{ mt: 4, mb: 4}}>
-                    <Grid container spacing={3}>
+                    <Grid container spacing={1}>
                         <Grid item xs={12}>
                             <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column'}}>
                                 <BowlingTable data={bowlingData}/>
@@ -64,6 +66,15 @@ function BowlingStats() {
                             }}
                         >
                             <AverageChart data={bowlingData} />
+                        </Paper>
+                    </Grid>
+                    <Grid item xs={12}>
+                        <Paper sx={{ p: 2}}>
+                            <ImageMarker 
+                                markers={[]} 
+                                src="cricket.jpg"
+                                extraClass={styles.img}
+                            />
                         </Paper>
                     </Grid>
                     </Grid>

@@ -121,58 +121,6 @@ function ResultForm({resultData, setResultData}) {
                         flexDirection: 'row',
                         justifyContent: 'center'
                     }}>
-                        <Stack component='form' spacing={5} sx={{p:3, width: '25%'}}>
-                            <TextField 
-                                id='overs'
-                                label='Overs'
-                                type='number'
-                                variant='outlined'
-                                value={resultData.overs}
-                                onChange={(e) => {
-                                    const overs = e.target.value;
-                                    setResultData({...resultData, overs});
-                                }}
-                            />
-                        </Stack>
-                        <Stack component='form' spacing={5} sx={{p:3, width: '25%'}}>
-                            <TextField 
-                                id='runs-conceded'
-                                label='Runs Conceded'
-                                type='number'
-                                variant='outlined'
-                                value={resultData.runsConceded}
-                                onChange={(e) => {
-                                    const runsConceded = e.target.value;
-                                    setResultData({...resultData, runsConceded})
-                                }}
-                            />
-                        </Stack>
-                        <Stack component='form' spacing={5} sx={{p:3, width: '25%'}}>
-                            <TextField 
-                                id='wickets'
-                                label='Wickets'
-                                type='number'
-                                variant='outlined'
-                                value={resultData.wickets}
-                                onChange={(e) => {
-                                    const wickets = e.target.value;
-                                    setResultData({...resultData, wickets});
-                                }}
-                            />
-                        </Stack>
-                        <Stack component='form' spacing={5} sx={{p:3, width: '25%'}}>
-                            <TextField 
-                                id='maidens'
-                                label='Maidens'
-                                type='number'
-                                variant='outlined'
-                                value={resultData.maidens}
-                                onChange={(e) => {
-                                    const maidens = e.target.value;
-                                    setResultData({...resultData, maidens})
-                                }}
-                            />
-                        </Stack>
                     </Grid>
                 </Paper>
             </Grid>
